@@ -1,6 +1,16 @@
 package tareas
 
-abstract class Tarea(var descripcion: String) {
+abstract class Tarea(private var _descripcion: String) {
+    var descripcion: String
+        get() = _descripcion
+        set(value) {
+            _descripcion = value
+        }
+
+    init {
+        println("Tarea creada con descripción: $descripcion")
+    }
+
     abstract fun imprimirDetalles()
 }
 
@@ -9,7 +19,16 @@ interface Asignable {
 }
 
 class TareaSimple(descripcion: String) : Tarea(descripcion), Asignable {
-    private var empleadoAsignado: String? = null
+    private var _empleadoAsignado: String? = null
+    var empleadoAsignado: String?
+        get() = _empleadoAsignado
+        set(value) {
+            _empleadoAsignado = value
+        }
+
+    init {
+        println("Tarea Simple creada con descripción: $descripcion")
+    }
 
     override fun imprimirDetalles() {
         println("Descripción: $descripcion")
@@ -22,8 +41,24 @@ class TareaSimple(descripcion: String) : Tarea(descripcion), Asignable {
     }
 }
 
-class TareaCompleja(descripcion: String, private var prioridad: Int) : Tarea(descripcion), Asignable {
-    private var empleadoAsignado: String? = null
+class TareaCompleja(descripcion: String, prioridad: Int) : Tarea(descripcion), Asignable {
+    private var _prioridad: Int = prioridad
+    var prioridad: Int
+        get() = _prioridad
+        set(value) {
+            _prioridad = value
+        }
+
+    private var _empleadoAsignado: String? = null
+    var empleadoAsignado: String?
+        get() = _empleadoAsignado
+        set(value) {
+            _empleadoAsignado = value
+        }
+
+    init {
+        println("Tarea Compleja creada con descripción: $descripcion y prioridad: $prioridad")
+    }
 
     override fun imprimirDetalles() {
         println("Descripción: $descripcion")
